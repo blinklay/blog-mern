@@ -1,16 +1,9 @@
 import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import { validationResult } from "express-validator";
 
 export const register = async (req, res) => {
   try {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array())
-    }
-
     const hash = bcrypt.hashSync(req.body.password, 7)
 
     const doc = new User({
